@@ -1,8 +1,8 @@
 pipeline{
     agent any
        environment {
-            CLIENT_ID = credentials('CLIENT_ID_CREDENTIAL_ID')
-            CLIENT_SECRET = credentials('CLIENT_SECRET_CREDENTIAL_ID')
+            CLIENT_ID = credentials('CLIENT_ID')
+            CLIENT_SECRET = credentials('CLIENT_SECRET')
         }
     stages{
         stage('Verify'){
