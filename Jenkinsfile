@@ -6,15 +6,32 @@ pipeline{
        }
 
     stages{
-        stage('build'){
+        stage('checkout') {
+            steps {
+               git branch: 'main',
+               url: 'https://github.com/hkanoute/selenium-jenkins',
+               credentialsId: 'git_credentials'
+            }
+        }
+        stage('Build'){
             steps{
                 bat 'mvn clean'
             }
         }
-        stage('test'){
+        stage('Test'){
             steps   {
-                bat 'mvn test'
+                bat 'mvn verify'
             }
+        }
+        stage('Generate Report'){
+            steps   {
+                bat 'mvn surefire-report:report'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+             }
         }
     }
 }
