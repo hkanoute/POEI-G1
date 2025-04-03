@@ -3,12 +3,17 @@ pipeline{
        environment {
             CLIENT_ID = credentials('CLIENT_ID')
             CLIENT_SECRET = credentials('CLIENT_SECRET')
-        }
+       }
 
     stages{
-        stage('Verify'){
+        stage('build'){
             steps{
-                bat 'mvn clean install'
+                bat 'mvn clean'
+            }
+        }
+        stage('test'){
+            steps   {
+                bat 'mvn test'
             }
         }
     }
