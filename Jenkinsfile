@@ -23,15 +23,10 @@ pipeline{
                 bat 'mvn verify'
             }
         }
-        stage('Generate Report'){
-            steps   {
-                bat 'mvn surefire-report:report'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-             }
-        }
     }
+     post {
+        always {
+            cucumber fileIncludePattern: 'target/cucumber.json'
+        }
+     }
 }

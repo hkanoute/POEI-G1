@@ -22,7 +22,6 @@ import java.nio.file.Path;
 )
 public class TestRunner {
 
-    @BeforeClass
     public static void getFeatures() throws IOException, InterruptedException {
         XrayApiClient xray = new XrayApiClient();
         Path myDirectory = Path.of("src/test/resources/features");
