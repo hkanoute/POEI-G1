@@ -28,13 +28,8 @@ public class XrayApiClient {
 
     public XrayApiClient() {
         this.baseUrl = "https://xray.cloud.getxray.app/api/v2";
-        if(ConfigReader.getProperty("RUNS_ON").equals("jenkins")){
-            this.clientId = System.getenv("CLIENT_ID");
-            this.clientSecret = System.getenv("CLIENT_SECRET");
-        }else {
-            this.clientId = ConfigReader.getProperty("CLIENT_ID");
-            this.clientSecret = ConfigReader.getProperty("CLIENT_SECRET");
-        }
+        this.clientId = System.getenv("CLIENT_ID");
+        this.clientSecret = System.getenv("CLIENT_SECRET");
 
         this.httpClient = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_2)
@@ -62,7 +57,6 @@ public class XrayApiClient {
         if (response.statusCode() == 200) {
             authToken = response.body().replace("\"", "");
             tokenExpiryTime = System.currentTimeMillis() + 3600000;
-            System.out.println(authToken);
         } else {
             throw new IOException("Authentication failed: " + response.statusCode() + " - " + response.body());
         }

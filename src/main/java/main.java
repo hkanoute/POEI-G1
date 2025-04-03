@@ -10,9 +10,11 @@ public class main {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         XrayApiClient xray = new XrayApiClient();
-        Path myDirectory = Path.of("src/test/resources/features");
+        System.getenv().forEach((key, value) -> System.out.println(key + "=" + value));
 
-        xray.export("/export/cucumber?keys=" + ConfigReader.getProperty("KEYS"), myDirectory);
+        //Path myDirectory = Path.of("src/test/resources/features");
+
+      //  xray.export("/export/cucumber?keys=" + ConfigReader.getProperty("KEYS"), myDirectory);
 
 
     }
