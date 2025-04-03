@@ -13,14 +13,9 @@ pipeline{
                credentialsId: 'git_credentials'
             }
         }
-        stage('Build'){
+        stage('Build & Test'){
             steps{
-                bat 'mvn clean'
-            }
-        }
-        stage('Test'){
-            steps   {
-                bat 'mvn verify'
+                bat 'mvn clean verify'
             }
         }
     }
