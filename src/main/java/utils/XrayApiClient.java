@@ -28,8 +28,14 @@ public class XrayApiClient {
 
     public XrayApiClient() {
         this.baseUrl = "https://xray.cloud.getxray.app/api/v2";
-        this.clientId = ConfigReader.getProperty("CLIENT_ID");
-        this.clientSecret = ConfigReader.getProperty("CLIENT_SECRET");
+        if(ConfigReader.getProperty("RUNS_ON").equals("jenkins")){
+            this.clientId = System.getenv("CLIENT_ID");
+            this.clientSecret = System.getenv("CLIENT_SECRET");
+        }else {
+            this.clientId = ConfigReader.getProperty("CLIENT_ID");
+            this.clientSecret = ConfigReader.getProperty("CLIENT_SECRET");
+        }
+
         this.httpClient = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_2)
                 .connectTimeout(Duration.ofSeconds(20))
