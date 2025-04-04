@@ -10,13 +10,6 @@ pipeline{
     }
 
     stages{
-        stage('checkout') {
-            steps {
-               git branch: 'main',
-               url: 'https://github.com/hkanoute/selenium-jenkins',
-               credentialsId: 'git_credentials'
-            }
-        }
         stage('Build & Test'){
             steps{
                 bat 'mvn clean verify'
