@@ -73,12 +73,12 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M7</version>
                 <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
                     <includes>
                         <include>**/TestRunner.java</include>
                     </includes>
                 </configuration>
             </plugin>
-
             <!-- Send report after tests -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

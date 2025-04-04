@@ -18,13 +18,22 @@ import java.nio.file.Path;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"steps", "utils"},
-        plugin = {"pretty", "html:target/cucumber-reports.html", "json:target/cucumber.json"}
+        plugin = {"pretty", "html:target/cucumber-reports.html", "json:target/cucumber.json", "junit:target/surefire-reports/cucumber.xml"}
 )
 public class TestRunner {
 
     public static void getFeatures() throws IOException, InterruptedException {
         XrayApiClient xray = new XrayApiClient();
         Path myDirectory = Path.of("src/test/resources/features");
+        Files.walk(myDirectory)
+                .filter(Files::isRegularFile)
+                .forEach(file -> {
+                    try {
+                        Files.delete(file);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
         xray.export("/export/cucumber?keys=" + System.getenv("KEYS"), myDirectory);
     }
 
