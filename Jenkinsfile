@@ -1,7 +1,7 @@
 pipeline{
     agent any
     parameters {
-        string(name: 'KEYS', defaultValue: '', description: 'Veuillez renseigner les clés de test à exécuter séparées par un ;')
+        string(name: 'KEYS', defaultValue: '', description: 'Veuillez renseigner les cles de test a executer separees par un ;')
     }
     environment {
         CLIENT_ID = credentials('CLIENT_ID')
