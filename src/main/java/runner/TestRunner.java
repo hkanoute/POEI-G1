@@ -25,8 +25,7 @@ public class TestRunner {
     public static void getFeatures() throws IOException, InterruptedException {
         XrayApiClient xray = new XrayApiClient();
         Path myDirectory = Path.of("src/test/resources/features");
-
-        xray.export("/export/cucumber?keys=" + ConfigReader.getProperty("KEYS"), myDirectory);
+        xray.export("/export/cucumber?keys=" + System.getenv("KEYS"), myDirectory);
     }
 
     @AfterClass
