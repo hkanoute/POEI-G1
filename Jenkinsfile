@@ -26,7 +26,7 @@ pipeline {
                                         -H "Authorization: Bearer %TOKEN%" ^
                                         -o features.zip
                                     """
-                    bat 'tar -xf features.zip -C src/test/resources/featuresFromXRAY/'
+                    bat 'tar -xf features.zip -C src/test/resources/features/'
                 }
             }
         }
