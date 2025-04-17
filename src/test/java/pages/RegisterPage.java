@@ -4,6 +4,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.DriverHelper;
+
+import java.time.Duration;
 public class RegisterPage extends BasePage {
     @FindBy(id = "email_create")
     private WebElement emailInput;
@@ -54,9 +59,14 @@ public class RegisterPage extends BasePage {
     @FindBy(xpath = "//div[@class='alert alert-danger']//li")
     private WebElement registrationError;
 
-    public void goToRegisterPage(String email) {
+    public void submitEmail(String email) {
         emailInput.sendKeys(email);
         createAccountBtn.click();
+    }
+
+    public void waitForCreateAccountForm() {
+        WebDriverWait wait = new WebDriverWait(DriverHelper.driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(firstNameInput));
     }
 
     public String getEmailErrorMessage() {
@@ -64,10 +74,12 @@ public class RegisterPage extends BasePage {
     }
 
     public void selectGender(String genre) {
+        WebDriverWait wait = new WebDriverWait(DriverHelper.driver, Duration.ofSeconds(10));
+
         if (genre.equalsIgnoreCase("Mr")) {
-            genderMr.click();
+            wait.until(ExpectedConditions.elementToBeClickable(genderMr)).click();
         } else {
-            genderMrs.click();
+            wait.until(ExpectedConditions.elementToBeClickable(genderMrs)).click();
         }
     }
 
@@ -83,9 +95,9 @@ public class RegisterPage extends BasePage {
     public void selectDate(String date_naissance) {
         if (date_naissance != null && !date_naissance.isEmpty()) {
             String[] parts = date_naissance.split("/");
-            new Select(daysSelect).selectByValue(parts[0]);
-            new Select(monthsSelect).selectByValue(parts[1]);
-            new Select(yearsSelect).selectByValue(parts[2]);
+            new Select(daysSelect).selectByValue(String.valueOf(Integer.parseInt(parts[0])));
+            new Select(monthsSelect).selectByValue(String.valueOf(Integer.parseInt(parts[1])));
+            new Select(yearsSelect).selectByValue(String.valueOf(Integer.parseInt(parts[2])));
         }
     }
 
