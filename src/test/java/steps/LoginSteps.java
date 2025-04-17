@@ -73,4 +73,9 @@ public class LoginSteps {
         Assert.assertEquals(destination, actualUrl);
 
     }
+
+    @When("Cliquer sur le lien {string}")
+    public void cliquerSurLeLien(String arg0) {
+
+    }
 }

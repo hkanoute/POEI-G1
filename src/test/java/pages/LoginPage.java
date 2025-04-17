@@ -36,6 +36,12 @@ public class LoginPage extends BasePage {
     private WebElement errorMessage;
 
     /**
+     * Web element representing the forgot password link.
+     */
+    @FindBy(xpath = "//a[@title='Recover your forgotten password']")
+    private WebElement forgotPasswordLink;
+
+    /**
      * method to enter the email and password into the respective input fields and click the login button.
      */
     public void login() {
@@ -81,5 +87,12 @@ public class LoginPage extends BasePage {
      */
     public String getErrorMessage() {
         return errorMessage.getText();
+    }
+
+    /**
+     * Method to click the forgot password link.
+     */
+    public void clickForgotPasswordLink() {
+        forgotPasswordLink.click();
     }
 }
