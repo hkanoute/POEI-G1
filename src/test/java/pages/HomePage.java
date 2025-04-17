@@ -5,34 +5,27 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
 
+//find la barre de menu
+    @FindBy(xpath = "//span[@class='shop-phone']")
+    private WebElement menu_noir;
 
-    @FindBy(xpath = "//a[@href = \"openaccount.htm\"]")
-    private WebElement openAccountLink;
+    @FindBy(id = "contact-link")
+    private WebElement contact_us;
 
-    @FindBy(xpath = "//h1[contains(text(),'Open New Account')]")
-    private WebElement openAccountTitle;
+    @FindBy(id = "center_column")
+    private WebElement contact_us_page;
 
-    @FindBy(xpath = "//input[@type=\"button\"]")
-    private WebElement openAccountSubmitButton;
 
-    @FindBy(xpath = "(//tr)[2]//a")
-    private WebElement accountLink;
 
-    public void iClickOnOpenAccount() {
-        openAccountLink.click();
+    public String menuAffiche() {
+        return menu_noir.getText();
     }
 
-    public String imRedirectedToTheOpenAccountPage() {
-        return openAccountLink.getText();
+
+    public void clickOnContactUs() {
+        contact_us.click();
     }
 
-    public void iFinishCreatingMyAccount() {
-        openAccountSubmitButton.click();
-    }
-
-    public void iClickOnMyAccount() {
-        accountLink.click();
-    }
 
 
 }
