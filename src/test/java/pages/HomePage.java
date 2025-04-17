@@ -2,37 +2,19 @@ package pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.ConfigReader;
+
+import static utils.DriverHelper.driver;
 
 public class HomePage extends BasePage {
+    @FindBy(xpath = "//a[@class=\"login\"]")
+    private WebElement loginButton;
 
-
-    @FindBy(xpath = "//a[@href = \"openaccount.htm\"]")
-    private WebElement openAccountLink;
-
-    @FindBy(xpath = "//h1[contains(text(),'Open New Account')]")
-    private WebElement openAccountTitle;
-
-    @FindBy(xpath = "//input[@type=\"button\"]")
-    private WebElement openAccountSubmitButton;
-
-    @FindBy(xpath = "(//tr)[2]//a")
-    private WebElement accountLink;
-
-    public void iClickOnOpenAccount() {
-        openAccountLink.click();
+    public void navigateToHomePage() {
+        driver.get(ConfigReader.getProperty("BASE_URL"));
     }
 
-    public String imRedirectedToTheOpenAccountPage() {
-        return openAccountLink.getText();
+    public void clickLoginButton() {
+        loginButton.click();
     }
-
-    public void iFinishCreatingMyAccount() {
-        openAccountSubmitButton.click();
-    }
-
-    public void iClickOnMyAccount() {
-        accountLink.click();
-    }
-
-
 }
