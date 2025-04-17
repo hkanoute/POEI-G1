@@ -2,6 +2,9 @@ package pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.ConfigReader;
+
+import static utils.DriverHelper.driver;
 
 public class HomePage extends BasePage {
 
@@ -15,10 +18,14 @@ public class HomePage extends BasePage {
     @FindBy(id = "center_column")
     private WebElement contact_us_page;
 
+    @FindBy(xpath = "//a[@class=\"login\"]")
+    private WebElement loginButton;
 
 
     public String menuAffiche() {
         return menu_noir.getText();
+    public void navigateToHomePage() {
+        driver.get(ConfigReader.getProperty("BASE_URL"));
     }
 
 
@@ -28,4 +35,7 @@ public class HomePage extends BasePage {
 
 
 
+    public void clickLoginButton() {
+        loginButton.click();
+    }
 }

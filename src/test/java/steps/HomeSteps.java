@@ -20,10 +20,6 @@ public class HomeSteps {
     }
 
 
-    @Given("je suis sur la page d'accueil")
-    public void jeSuisSurLaPageDAccueil() {
-      driver.get(ConfigReader.getProperty("BASE_URL"));
-    }
 
     @Then("La barre de menu noire est affichée")
     public void laBarreDeMenuNoireEstAffichée() {
@@ -35,6 +31,9 @@ public class HomeSteps {
         homePage.clickOnContactUs();
         assertEquals();
 
+    @Given("je suis sur la page d'accueil")
+    public void jeSuisSurLaPageDAccueil() {
+        homePage.navigateToHomePage();
     }
 
     @And("Le lien {string} redirige vers la page d’authentification")
