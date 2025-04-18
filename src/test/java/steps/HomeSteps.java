@@ -3,8 +3,6 @@ package steps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import org.junit.Assert;
 import pages.HomePage;
 import utils.ConfigReader;
 
@@ -33,12 +31,9 @@ public class HomeSteps {
     @And("Le lien {string} redirige vers la page de contact")
     public void leLienRedirigeVersLaPageDeContact(String contact) {
         homePage.clickOnContactUs();
-        assertEquals();
 
-    @Given("je suis sur la page d'accueil")
-    public void jeSuisSurLaPageDAccueil() {
-        homePage.navigateToHomePage();
     }
+
 
     @And("Le lien {string} redirige vers la page d’authentification")
     public void leLienRedirigeVersLaPageDAuthentification(String arg0) {
