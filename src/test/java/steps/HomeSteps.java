@@ -13,6 +13,10 @@ import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static utils.DriverHelper.driver;
+import utils.ConfigReader;
+
+import static org.junit.Assert.assertEquals;
+import static utils.DriverHelper.driver;
 
 public class HomeSteps {
 
@@ -38,7 +42,18 @@ public class HomeSteps {
 
     @Given("je suis sur la page d'accueil")
     public void jeSuisSurLaPageDAccueil() {
-        homePage.navigateToHomePage();
+      driver.get(ConfigReader.getProperty("BASE_URL"));
+    }
+
+    @Then("La barre de menu noire est affichée")
+    public void laBarreDeMenuNoireEstAffichée() {
+        assertEquals("Call us now", homePage.menuAffiche());
+    }
+
+    @And("Le lien {string} redirige vers la page de contact")
+    public void leLienRedirigeVersLaPageDeContact(String contact) {
+        homePage.clickOnContactUs();
+
     }
 
     @And("Le lien {string} redirige vers la page d’authentification")
@@ -107,7 +122,7 @@ public class HomeSteps {
         homePage.clickOnLogo();
         logo = driver.getCurrentUrl();
         assertEquals("http://www.automationpractice.pl/index.php", logo);
-        
+
     }
 
     @Then("Redirection vers {string}")

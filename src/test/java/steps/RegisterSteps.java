@@ -2,11 +2,14 @@ package steps;
 
 
 import io.cucumber.java.en.*;
-import org.junit.Assert;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.PageFactory;
 import pages.RegisterPage;
 import utils.DriverHelper;
+
+import java.util.Objects;
 
 import static org.junit.Assert.assertTrue;
 
@@ -15,12 +18,6 @@ public class RegisterSteps {
     private boolean skipFormSteps = false;
     RegisterPage registerPage = PageFactory.initElements(DriverHelper.driver, RegisterPage.class);
     String generatedEmail;
-
-
-    @Given("L'utilisateur est sur la page {string}")
-    public void utilisateurEstSurLaPage(String page) {
-        DriverHelper.driver.get("http://www.automationpractice.pl/index.php?controller=authentication&back=my-account");
-    }
 
     @When("Il saisit l'email {string}")
     public void ilSaisitLEmail(String email) {
@@ -48,7 +45,6 @@ public class RegisterSteps {
             skipFormSteps = true;
         } else {
             try {
-                registerPage.waitForCreateAccountForm();
                 skipFormSteps = false;
             } catch (TimeoutException e) {
                 assertTrue(true);
@@ -89,7 +85,7 @@ public class RegisterSteps {
 
     @Then("Le système affiche le message {string}")
     public void leSystemeAfficheMessageFinal(String message) {
-        if (message == "Fail") {
+        if (Objects.equals(message, "Fail")) {
             assertTrue(true);
 
         } else {
@@ -98,4 +94,7 @@ public class RegisterSteps {
             System.out.println("Message affiché : " + finalMessage);
         }
     }
+
+
+
 }
