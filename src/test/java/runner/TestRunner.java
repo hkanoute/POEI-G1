@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"steps", "utils"},
-        tags = "@POEI25P2G1-19",
         plugin = {"pretty", "html:target/cucumber-reports.html", "json:target/cucumber.json", "junit:target/surefire-reports/cucumber.xml"}
 )
 public class TestRunner {
