@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import java.awt.datatransfer.StringSelection;
 
 import static utils.DriverHelper.driver;
 
@@ -18,12 +17,7 @@ import static utils.DriverHelper.driver;
  */
 public class LoginPage extends BasePage {
 
-    RegisterPage registerPage;
 
-    public LoginPage() {
-        super();
-        registerPage = new RegisterPage();
-    }
 
     /**
      * Web element representing the email input field.

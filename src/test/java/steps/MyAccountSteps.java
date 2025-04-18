@@ -1,11 +1,12 @@
 package steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.MyAccountPage;
 
 public class MyAccountSteps {
-    private MyAccountPage myAccountPage;
+    private final MyAccountPage myAccountPage;
 
     public MyAccountSteps() {
         myAccountPage = new MyAccountPage();
@@ -23,7 +24,7 @@ public class MyAccountSteps {
     /**
      * Vérifie que l'utilisateur est sur la page "Mon Compte"
      */
-    @When("Il clique sur le bouton Add my first Address")
+    @When("Je clique sur le bouton Add my first Address")
     public void ilCliqueSurLeBoutonAddMyFirstAddress() {
         myAccountPage.clickAddMyFirstAddressButton();
     }
@@ -42,5 +43,11 @@ public class MyAccountSteps {
     @Then("Il est redirigé vers la page d’accueil")
     public void ilEstRedirigéVersLaPageDAccueil() {
         myAccountPage.verifyHomePage();
+    }
+
+    @And("Je peux modifier les champs obligatoire du formulaire")
+    public void jePeuxModifierLesChampsObligatoireDuFormulaire() {
+
+        myAccountPage.fillMandatoryFieldsForAddress();
     }
 }

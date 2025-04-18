@@ -4,12 +4,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.DriverHelper;
 
 import java.time.Duration;
 public class RegisterPage extends BasePage {
+    private final LoginPage loginPage;
+
+    public RegisterPage() {
+        super();
+        loginPage = new LoginPage();
+    }
+
     @FindBy(id = "email_create")
     private WebElement emailInput;
 
@@ -121,5 +125,27 @@ public class RegisterPage extends BasePage {
 
     public WebElement getEmail() {
         return this.emailInput;
+    }
+
+
+    /**
+     * Register a random user with the given parameters.
+     * @param genre
+     * @param prenom
+     * @param nom
+     * @param password
+     * @param date_naissance
+     */
+    public void registerRandomUser(String genre, String prenom, String nom, String password, String date_naissance) {
+
+        loginPage.GoToAuthPage();
+
+        String generatedEmail = "user" + System.currentTimeMillis() + "@mail.com";
+        this.submitEmail(generatedEmail);
+        this.selectGender(genre);
+        this.fillName(prenom, nom);
+        this.fillPassword(password);
+        this.selectDate(date_naissance);
+        this.clickRegister();
     }
 }

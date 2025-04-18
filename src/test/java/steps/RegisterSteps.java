@@ -3,21 +3,23 @@ package steps;
 
 import io.cucumber.java.en.*;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.support.PageFactory;
 import pages.RegisterPage;
-import utils.DriverHelper;
+
 
 import java.util.Objects;
 
 import static org.junit.Assert.assertTrue;
 
 public class RegisterSteps {
-
+    RegisterPage registerPage;
     private boolean skipFormSteps = false;
-    RegisterPage registerPage = PageFactory.initElements(DriverHelper.driver, RegisterPage.class);
     String generatedEmail;
+
+    public RegisterSteps() {
+        this.registerPage = new RegisterPage();
+    }
+
 
     @When("Il saisit l'email {string}")
     public void ilSaisitLEmail(String email) {
@@ -95,6 +97,8 @@ public class RegisterSteps {
         }
     }
 
-
-
+    @Given("Je viens de m'inscrire sur le site")
+    public void jeViensDeMInscrireSurLeSite() {
+        registerPage.registerRandomUser("Mr", "John", "Doe", "test123", "01/01/1990");
+    }
 }

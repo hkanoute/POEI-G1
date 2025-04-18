@@ -4,10 +4,19 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import static utils.DriverHelper.driver;
 
 public class MyAccountPage extends BasePage {
+    private RegisterPage registerPage;
+
+    /**
+     * Constructor to initialize the web elements using PageFactory.
+     */
+    public MyAccountPage() {
+        this.registerPage = new RegisterPage();
+    }
 
 
     @FindBy(xpath = "//ul[@class= \"myaccount-link-list\"]/li[1]")
@@ -24,6 +33,32 @@ public class MyAccountPage extends BasePage {
 
     @FindBy(xpath = "//a[@title = \"Return to Home\"]")
     private WebElement homeButton;
+
+    @FindBy(id = "firstname")
+    private WebElement firstName;
+
+    @FindBy(id = "lastname")
+    private WebElement lastName;
+
+    @FindBy(id = "address1")
+    private WebElement address1;
+
+    @FindBy(id = "city")
+    private WebElement city;
+
+    @FindBy(id = "id_state")
+    private WebElement stateSelect;
+
+    @FindBy(id = "postcode")
+    private WebElement postcodeSelect;
+
+    @FindBy(id = "id_country")
+    private WebElement countrySelect;
+
+    @FindBy(id = "phone")
+    private WebElement phone;
+
+
 
 
 
@@ -62,5 +97,21 @@ public class MyAccountPage extends BasePage {
 
     public void verifyHomePage() {
         bodyIdContains("index");
+    }
+
+    public void fillMandatoryFieldsForAddress() {
+        firstName.sendKeys("John");
+        lastName.sendKeys("Doe");
+        address1.sendKeys("123 Main St");
+        city.sendKeys("New York");
+
+        Select stateSelectDropdown = new Select(stateSelect);
+        stateSelectDropdown.selectByVisibleText("New York");
+
+        postcodeSelect.sendKeys("10001");
+        Select countrySelectDropdown = new Select(countrySelect);
+        countrySelectDropdown.selectByVisibleText("United States");
+
+        phone.sendKeys("1234567890");
     }
 }

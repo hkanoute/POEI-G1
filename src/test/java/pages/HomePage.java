@@ -11,7 +11,7 @@ import static utils.DriverHelper.driver;
  */
 public class HomePage extends BasePage {
 
-//find la barre de menu
+
     @FindBy(xpath = "//span[@class='shop-phone']")
     private WebElement menu_noir;
 
