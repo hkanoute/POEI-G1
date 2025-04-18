@@ -152,4 +152,7 @@ public class LoginSteps {
 
     }
 
+    @Given("L{string}espace My Account")
+    public void lUtilisateurEstDansLEspaceMyAccount() {
+    }
 }
