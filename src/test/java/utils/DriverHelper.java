@@ -17,12 +17,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
+/**
+ * DriverHelper class to manage WebDriver instances.
+ */
 public class DriverHelper {
     public static WebDriver driver;
 
-
-
-
+    /**
+     * Method to initialize the WebDriver instance based on the configuration.
+      * @throws MalformedURLException
+     */
     @Before
     public void getDriverHelper() throws MalformedURLException {
         String browser = ConfigReader.getProperty("BROWSER");
@@ -59,14 +63,17 @@ public class DriverHelper {
         driver.get(ConfigReader.getProperty("BASE_URL"));
     }
 
+    /**
+     * Method to take a screenshot if a step fails.
+     * @param scenario
+     */
     @After
     public void takeScreenShotsOnStepFailure(Scenario scenario) {
         if (scenario.isFailed()) {
             byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png", scenario.getName());
         }
-        driver.quit();
-
+        //driver.quit();
     }
 
 }

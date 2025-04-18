@@ -1,8 +1,15 @@
 package pages;
 
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+
+import java.awt.datatransfer.StringSelection;
+
 import static utils.DriverHelper.driver;
 
 /**
@@ -10,6 +17,13 @@ import static utils.DriverHelper.driver;
  * This class contains methods to interact with the login page elements.
  */
 public class LoginPage extends BasePage {
+
+    RegisterPage registerPage;
+
+    public LoginPage() {
+        super();
+        registerPage = new RegisterPage();
+    }
 
     /**
      * Web element representing the email input field.
@@ -41,6 +55,18 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//a[@title='Recover your forgotten password']")
     private WebElement forgotPasswordLink;
 
+
+    @FindBy(id = "email")
+    private WebElement forgotEmailInputField;
+
+    @FindBy(xpath = "//p[@class=\"submit\"]/button")
+    private WebElement resetPasswordButton;
+
+
+    @FindBy(id = "refresh")
+    private WebElement refreshButton;
+
+
     /**
      * method to enter the email and password into the respective input fields and click the login button.
      */
@@ -53,14 +79,16 @@ public class LoginPage extends BasePage {
 
     /**
      * Method to enter the email and password into the respective input fields.
+     *
      * @param email The email address to be entered.
      */
-    public  void fillEmail(String email) {
+    public void fillEmail(String email) {
         emailInput.sendKeys(email);
     }
 
     /**
      * Method to enter the password into the password input field.
+     *
      * @param password
      */
     public void fillPassword(String password) {
@@ -83,6 +111,7 @@ public class LoginPage extends BasePage {
 
     /**
      * Method to get the error message displayed on the login page.
+     *
      * @return The error message text.
      */
     public String getErrorMessage() {
@@ -94,5 +123,49 @@ public class LoginPage extends BasePage {
      */
     public void clickForgotPasswordLink() {
         forgotPasswordLink.click();
+    }
+
+    /**
+     * Method to enter the email address in the forgot password input field.
+     *
+     * @param email The email address to be entered.
+     */
+    public void fillForgotEmail(String email) {
+        forgotEmailInputField.click();
+        Actions actions = new Actions(driver);
+        actions.keyDown(Keys.CONTROL).sendKeys("v").keyUp(Keys.CONTROL).perform();
+
+    }
+
+    /**
+     * Method to click the reset password button.
+     */
+    public void clickResetPasswordButton() {
+        resetPasswordButton.click();
+    }
+
+    /**
+     * Methode to click on the refresh button.
+     */
+    public void clickOnRefreshButton() {
+        refreshButton.click();
+    }
+
+    /**
+     * Method to refresh the tab.
+     */
+    public void refreshTheTab() {
+        // refresh the active tab
+        driver.navigate().refresh();
+    }
+
+    /**
+     * Method clicking on the reset link.
+     */
+    public void clickOnResetLink() {
+        WebDriver iframe = driver.switchTo().frame("ifmail");
+        System.out.println("iframe = " + iframe);
+        iframe.findElement(By.xpath("//*[contains(text(),'id_customer')]")).click();
+        driver.switchTo().defaultContent();
     }
 }

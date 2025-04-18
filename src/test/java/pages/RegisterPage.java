@@ -64,22 +64,20 @@ public class RegisterPage extends BasePage {
         createAccountBtn.click();
     }
 
-    public void waitForCreateAccountForm() {
-        WebDriverWait wait = new WebDriverWait(DriverHelper.driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(firstNameInput));
+    public void clickCreateAccount() {
+        createAccountBtn.click();
     }
+
 
     public String getEmailErrorMessage() {
         return emailErrorMessage.getText();
     }
 
     public void selectGender(String genre) {
-        WebDriverWait wait = new WebDriverWait(DriverHelper.driver, Duration.ofSeconds(10));
-
         if (genre.equalsIgnoreCase("Mr")) {
-            wait.until(ExpectedConditions.elementToBeClickable(genderMr)).click();
+           genderMr.click();
         } else {
-            wait.until(ExpectedConditions.elementToBeClickable(genderMrs)).click();
+            genderMrs.click();
         }
     }
 
@@ -121,4 +119,7 @@ public class RegisterPage extends BasePage {
         }
     }
 
+    public WebElement getEmail() {
+        return this.emailInput;
+    }
 }
