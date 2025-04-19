@@ -35,12 +35,12 @@ public class MyAccountSteps {
         myAccountPage.verifyAddressPage();
     }
 
-    @When("Il clique sur le bouton Home")
+    @When("Je clique sur le bouton Home")
     public void ilCliqueSurLeBoutonHome() {
         myAccountPage.clickHomeButton();
     }
 
-    @Then("Il est redirigé vers la page d’accueil")
+    @Then("Je est redirigé vers la page d’accueil")
     public void ilEstRedirigéVersLaPageDAccueil() {
         myAccountPage.verifyHomePage();
     }
