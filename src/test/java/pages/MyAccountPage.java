@@ -38,25 +38,22 @@ public class MyAccountPage extends BasePage {
      */
     @FindBy(xpath = "//h1")
     private WebElement myAccountTitle;
+
     @FindBy(xpath = "//a[@class='account']")
     private WebElement myAccountLink;
+
     @FindBy(xpath = "//li/a[@title='Addresses']")
     private WebElement myAddressesLink;
+
     @FindBy (xpath="//h3")
     private WebElement myAdresses;
-    @FindBy(xpath = "//ul[@class = \"last_item item box\"]/li[2]/span[1]")
-    private WebElement first_name;
-    @FindBy(xpath = "//ul[@class = \"last_item item box\"]/li[2]/span[2]")
-    private WebElement last_name;
-    @FindBy (xpath = "//ul[@class = \"last_item item box\"]/li[4]/span[@class='address_address1']")
-    private WebElement address;
-    @FindBy(xpath="//ul[@class = \"last_item item box\"]/li[7]/span[@class='address_phone']")
-    private WebElement phone;
+
+
     public String getPhone() {
         return phone.getText();
     }
     public String getAddress() {
-        return address.getText();
+        return adresses.getText();
     }
     public String getMyAdresses() {
         return myAdresses.getText();
@@ -100,11 +97,11 @@ public class MyAccountPage extends BasePage {
     }
 public String getName()
 {
-    return first_name.getText();
+    return firstName.getText();
 }
 public String getLastName()
 {
-    return  last_name.getText();
+    return  lastName.getText();
 }
 
     public void lUtilisateurVoitLAccèsÀ(String arg0) {

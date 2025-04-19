@@ -4,20 +4,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
 import pages.ContactUsPage;
 import pages.HomePage;
 import utils.ConfigReader;
 
-import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static utils.DriverHelper.driver;
-import utils.ConfigReader;
-
-import static org.junit.Assert.assertEquals;
-import static utils.DriverHelper.driver;
-
 public class HomeSteps {
 
     private final HomePage homePage;
@@ -25,7 +18,8 @@ public class HomeSteps {
     public HomeSteps() {
         this.homePage = new HomePage();
     }
-  public ContactUsPage contactUsPage=new ContactUsPage();
+
+    public ContactUsPage contactUsPage = new ContactUsPage();
 
 
     @Then("La barre de menu noire est affichée")
@@ -36,22 +30,21 @@ public class HomeSteps {
     @And("Le lien {string} redirige vers la page de contact")
     public void leLienRedirigeVersLaPageDeContact(String contact) {
         homePage.clickOnContactUs();
-        contact=contactUsPage.getContactUsPageTitle();
-        assertEquals("Contact us - My Shop",contact );
+        contact = contactUsPage.getContactUsPageTitle();
+        assertEquals("Contact us - My Shop", contact);
     }
 
     @Given("je suis sur la page d'accueil")
     public void jeSuisSurLaPageDAccueil() {
-      driver.get(ConfigReader.getProperty("BASE_URL"));
+        driver.get(ConfigReader.getProperty("BASE_URL"));
     }
-
 
 
     @And("Le lien {string} redirige vers la page d’authentification")
     public void leLienRedirigeVersLaPageDAuthentification(String authentication) {
 
         homePage.clickLoginButton();
-         authentication = driver.getCurrentUrl();
+        authentication = driver.getCurrentUrl();
         assertEquals("http://www.automationpractice.pl/index.php?controller=authentication&back=my-account", authentication);
 
     }
@@ -59,8 +52,8 @@ public class HomeSteps {
     @And("Les onglets {string}, {string} et {string} redirigent vers les articles de leur catégorie")
     public void lesOngletsEtRedirigentVersLesArticlesDeLeurCatégorie(String women, String dresses, String tshirts) throws InterruptedException {
         homePage.clickOnWomen();
-        women=driver.getCurrentUrl();
-        assertEquals("http://www.automationpractice.pl/index.php?id_category=3&controller=category",women);
+        women = driver.getCurrentUrl();
+        assertEquals("http://www.automationpractice.pl/index.php?id_category=3&controller=category", women);
         homePage.clickOnDresses();
         dresses = driver.getCurrentUrl();
         assertEquals("http://www.automationpractice.pl/index.php?id_category=8&controller=category", dresses);
@@ -75,7 +68,7 @@ public class HomeSteps {
     public void lOngletRedirigeVersLeSitePrestashop(String blog) {
         String mainWindowHandle = driver.getWindowHandle();
         homePage.clicOnBlog();
-        blog= driver.getWindowHandle();
+        blog = driver.getWindowHandle();
 
         for (String handle : driver.getWindowHandles()) {
             if (!handle.equals(blog)) {
@@ -95,7 +88,7 @@ public class HomeSteps {
     public void lesPublicitésRedirigentVersLeSitePartenairePrestashop() {
         homePage.navigateToHomePage();
         homePage.clicOnPub();
-       String pub= driver.getWindowHandle();
+        String pub = driver.getWindowHandle();
 
         for (String handle : driver.getWindowHandles()) {
             if (!handle.equals(pub)) {
@@ -104,7 +97,7 @@ public class HomeSteps {
             }
         }
 
-        pub= driver.getCurrentUrl();
+        pub = driver.getCurrentUrl();
         assertEquals("https://prestashop.com/", pub);
     }
 
@@ -127,6 +120,4 @@ public class HomeSteps {
         assertTrue(homePage.isLogoDisplayed());
     }
 
-
-    // Write code here that turns the phrase above into concrete actions    throw new cucumber.api.PendingException();}
 }

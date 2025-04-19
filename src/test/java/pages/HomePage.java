@@ -10,6 +10,7 @@ import utils.ConfigReader;
 import java.time.Duration;
 
 import static utils.DriverHelper.driver;
+
 /**
  * Page object class for the home page.
  * This class contains methods to interact with the home page elements.
@@ -38,16 +39,19 @@ public class HomePage extends BasePage {
      */
     @FindBy(xpath = "//a[@title='Women']")
     private WebElement women;
+
     @FindBy(xpath = "//div[@id = 'block_top_menu']/ul/li[2]/a")
     private WebElement dresses;
+
     @FindBy(xpath = "//div[@id = 'block_top_menu']/ul/li[3]/a")
     private WebElement t_shirts;
+
     @FindBy(xpath = "//a[@title='Blog']")
     private WebElement blog;
     /**
      * 4. vérifier que le slider de publicite nous redirige vers le site prestashop
      */
-    @FindBy(id="homepage-slider")
+    @FindBy(id = "homepage-slider")
     private WebElement pub;
     /**
      * 5. vérifier que le logo nous redirige vers la page d'accueil
@@ -77,38 +81,38 @@ public class HomePage extends BasePage {
     }
 
 
-
-
-    public void clickOnContactUs() {
-        contact_us.click();
-    }
-
-
-
     public void clickLoginButton() {
         loginButton.click();
     }
-    public void clickOnWomen(){
+
+    public void clickOnWomen() {
         women.click();
     }
-    public void clickOnDresses(){
+
+    public void clickOnDresses() {
         dresses.click();
     }
-    public void clickOnTshirts(){
+
+    public void clickOnTshirts() {
         t_shirts.click();
     }
-    public void clicOnBlog(){
+
+    public void clicOnBlog() {
         blog.click();
     }
-    public void clicOnPub(){
+
+    public void clicOnPub() {
         pub.click();
     }
+
     public String getLoginButtonText() {
         return loginButton.getText();
     }
+
     public void clickOnLogo() {
         logo.click();
     }
+
     public boolean isLogoDisplayed() {
         return logo.isDisplayed();
     }
