@@ -50,7 +50,6 @@ public class CartAccessSteps {
     @Then("Je suis redirige sur la page {string}")
     public void jeSuisRedirigeSurLaPage(String titrePageAttendu) {
         String titre = cartPage.getCartTitle();
-        System.out.println("Titre affiché sur la page : " + titre);
-        assertTrue("Redirection incorrecte vers la page du panier !", titre.toLowerCase().contains(titrePageAttendu.toLowerCase()));
+        assertTrue(titrePageAttendu.toLowerCase(), titre.toLowerCase().contains(titrePageAttendu.toLowerCase()));
     }
 }

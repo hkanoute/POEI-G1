@@ -25,7 +25,7 @@ public class HomeSteps {
 
     @Then("La barre de menu noire est affichée")
     public void laBarreDeMenuNoireEstAffichée() {
-        assertEquals("Call us now", homePage.menuAffiche());
+        assertEquals("Call us now: 0123-456-789", homePage.menuAffiche());
     }
 
     @And("Le lien {string} redirige vers la page de contact")
