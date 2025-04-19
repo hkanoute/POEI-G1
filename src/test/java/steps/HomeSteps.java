@@ -77,9 +77,8 @@ public class HomeSteps {
             }
         }
 
-        blog = driver.getCurrentUrl();
-
         Thread.sleep(2000);
+        blog = driver.getCurrentUrl();
         assertEquals("https://prestashop.com/blog/", blog);
         driver.close();
         driver.switchTo().window(mainWindowHandle);
