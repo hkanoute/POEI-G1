@@ -42,11 +42,8 @@ public class LoginPage extends BasePage {
     @FindBy(id="SubmitLogin")
     private WebElement loginButton;
 
-    /**
-     * Web element representing the login button.
-     */
-    @FindBy(id = "SubmitLogin")
-    private WebElement loginButton;
+
+
 
     /**
      * Web element representing the error message.

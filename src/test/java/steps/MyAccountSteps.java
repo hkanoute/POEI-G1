@@ -1,8 +1,13 @@
 package steps;
 
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.MyAccountPage;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class MyAccountSteps {
     private MyAccountPage myAccountPage;
@@ -42,5 +47,34 @@ public class MyAccountSteps {
     @Then("Il est redirigé vers la page d’accueil")
     public void ilEstRedirigéVersLaPageDAccueil() {
         myAccountPage.verifyHomePage();
+    }
+
+
+
+    @When("Je clique sur le lien {string}")
+    public void jeCliqueSurLeLien(String myaccount) {
+        myAccountPage.clickMyAccountLink();
+
+    }
+
+    @Then("Le site m'affiche un espace {string} avec mes coordonnees \\(nom prenom, addresse, telephone)")
+    public void leSiteMAfficheUnEspaceAvecMesCoordonneesNomPrenomAddresseTelephone(String arg0) {
+        assertEquals(myAccountPage.getMyAccountTitle(),"My account");
+        if(myAccountPage.getMyAdresses()!= null){
+            assertNotNull(myAccountPage.getName());
+            assertNotNull(myAccountPage.getLastName());
+            assertNotNull(myAccountPage.getAddress());
+            assertNotNull(myAccountPage.getPhone());
+        }
+
+    }
+
+    @And("Le site me permet de mettre à jour mes coordonnes")
+    public void leSiteMePermetDeMettreÀJourMesCoordonnes() {
+
+    }
+
+    @And("Le site me permet d'ajouter une autre adresse")
+    public void leSiteMePermetDAjouterUneAutreAdresse() {
     }
 }

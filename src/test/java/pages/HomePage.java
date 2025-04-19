@@ -1,7 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -56,29 +55,18 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[@id = 'header_logo']/a")
     private WebElement logo;
 
-//find la barre de menu
-    @FindBy(xpath = "//span[@class='shop-phone']")
-    private WebElement menu_noir;
-
-    @FindBy(id = "contact-link")
-    private WebElement contact_us;
 
     @FindBy(id = "center_column")
     private WebElement contact_us_page;
 
 
 
-    public String menuAffiche() {
-        return menu_noir.getText();
-    }
 
 
     public String menuAffiche() {
         return menu_noir.getText();
     }
-    public void clickOnContactUs() {
-        contact_us.click();
-    }
+
 
     /**
      * Method to navigate to the home page.

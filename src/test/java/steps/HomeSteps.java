@@ -45,16 +45,7 @@ public class HomeSteps {
       driver.get(ConfigReader.getProperty("BASE_URL"));
     }
 
-    @Then("La barre de menu noire est affichée")
-    public void laBarreDeMenuNoireEstAffichée() {
-        assertEquals("Call us now", homePage.menuAffiche());
-    }
 
-    @And("Le lien {string} redirige vers la page de contact")
-    public void leLienRedirigeVersLaPageDeContact(String contact) {
-        homePage.clickOnContactUs();
-
-    }
 
     @And("Le lien {string} redirige vers la page d’authentification")
     public void leLienRedirigeVersLaPageDAuthentification(String authentication) {

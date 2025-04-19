@@ -59,6 +59,7 @@ public class LoginSteps {
 
     /**
      * Step definition for verifying the error message displayed on the login page.
+     *
      * @param arg0 The expected error message.
      */
     @Then("Le message affiché est {string}")
@@ -96,6 +97,7 @@ public class LoginSteps {
     /**
      * Step definition for creating an account using a temporary email from Yopmail.
      * This method opens a new tab, generates a random email, and fills in the registration form.
+     *
      * @throws InterruptedException
      */
     public void createAnAccountFromThrowableMail() throws InterruptedException {
@@ -130,6 +132,8 @@ public class LoginSteps {
     public void remplirLeChampQuiPermetDeSaisirUnEmail() throws InterruptedException {
         createAnAccountFromThrowableMail();
         loginPage.fillForgotEmail("");
+    }
+
     @When("cliquer sur {string}")
     public void cliquerSur(String sign_out) {
         sign_out = "Sign out";
@@ -158,7 +162,6 @@ public class LoginSteps {
 
         }*/
 
-    }
 
     @And("cliquer sur le bouton {string}")
     public void cliquerSurLeBouton(String arg0) {
