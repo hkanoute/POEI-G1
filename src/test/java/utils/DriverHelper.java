@@ -23,10 +23,9 @@ import java.time.Duration;
 public class DriverHelper {
     public static WebDriver driver;
 
-    /**
-     * Method to initialize the WebDriver instance based on the configuration.
-      * @throws MalformedURLException
-     */
+
+
+
     @Before
     public void getDriverHelper() throws MalformedURLException {
         String browser = ConfigReader.getProperty("BROWSER");

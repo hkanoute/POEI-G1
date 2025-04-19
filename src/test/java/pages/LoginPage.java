@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import utils.ConfigReader;
 
 
 import static utils.DriverHelper.driver;
@@ -30,12 +31,13 @@ public class LoginPage extends BasePage {
      */
     @FindBy(id = "passwd")
     private WebElement passwordInput;
-
-    /**
-     * Web element representing the login button.
-     */
-    @FindBy(id = "SubmitLogin")
+    @FindBy(xpath = "//a[@title='Log me out']")
+    private WebElement logoutButton;
+    @FindBy(id="SubmitLogin")
     private WebElement loginButton;
+
+
+
 
     /**
      * Web element representing the error message.
@@ -67,6 +69,14 @@ public class LoginPage extends BasePage {
     public void login() {
         emailInput.sendKeys("auralion4@gmail.com");
         passwordInput.sendKeys("test123");
+        loginButton.click();
+
+    }
+    public void redirectToLoginPage() {
+        driver.get(ConfigReader.getProperty("LOGIN_URL"));
+    }
+    public void clickSignout() {
+        logoutButton.click();
         loginButton.click();
     }
 

@@ -33,6 +33,34 @@ public class MyAccountPage extends BasePage {
 
     @FindBy(xpath = "//a[@title = \"Return to Home\"]")
     private WebElement homeButton;
+    /**
+     * element representant la page my account
+     */
+    @FindBy(xpath = "//h1")
+    private WebElement myAccountTitle;
+    @FindBy(xpath = "//a[@class='account']")
+    private WebElement myAccountLink;
+    @FindBy(xpath = "//li/a[@title='Addresses']")
+    private WebElement myAddressesLink;
+    @FindBy (xpath="//h3")
+    private WebElement myAdresses;
+    @FindBy(xpath = "//ul[@class = \"last_item item box\"]/li[2]/span[1]")
+    private WebElement first_name;
+    @FindBy(xpath = "//ul[@class = \"last_item item box\"]/li[2]/span[2]")
+    private WebElement last_name;
+    @FindBy (xpath = "//ul[@class = \"last_item item box\"]/li[4]/span[@class='address_address1']")
+    private WebElement address;
+    @FindBy(xpath="//ul[@class = \"last_item item box\"]/li[7]/span[@class='address_phone']")
+    private WebElement phone;
+    public String getPhone() {
+        return phone.getText();
+    }
+    public String getAddress() {
+        return address.getText();
+    }
+    public String getMyAdresses() {
+        return myAdresses.getText();
+    }
 
     @FindBy(id = "firstname")
     private WebElement firstName;
@@ -60,7 +88,24 @@ public class MyAccountPage extends BasePage {
 
 
 
+    public void clickMyAddressesLink() {
+        myAddressesLink.click();
+    }
+    public void clickMyAccountLink() {
+        myAccountLink.click();
+    }
 
+    public String getMyAccountTitle() {
+        return myAccountTitle.getText();
+    }
+public String getName()
+{
+    return first_name.getText();
+}
+public String getLastName()
+{
+    return  last_name.getText();
+}
 
     public void lUtilisateurVoitLAccèsÀ(String arg0) {
         switch (arg0) {
