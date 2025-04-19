@@ -1,10 +1,12 @@
 package steps;
+
 import io.cucumber.java.en.*;
 import org.openqa.selenium.support.PageFactory;
 import pages.SearchPage;
 import utils.DriverHelper;
 
 import static org.junit.Assert.assertTrue;
+
 public class SearchPresenceSteps {
     SearchPage searchPage = PageFactory.initElements(DriverHelper.driver, SearchPage.class);
 
@@ -15,10 +17,7 @@ public class SearchPresenceSteps {
 
     @When("Se rediriger vers une page via  son {string}")
     public void seRedirigerVersUnePage(String url) {
-        // Si URL est vide ou espace, on reste sur la homepage
-        if (url != null && !url.trim().isEmpty()) {
-            DriverHelper.driver.get("http://www.automationpractice.pl/index.php?" + url);
-        }
+        DriverHelper.driver.get(url);
     }
 
     @Then("Verifier si la page contient le champ de recherche et la loupe")
@@ -28,5 +27,8 @@ public class SearchPresenceSteps {
     }
 
 
-
+    @Then("l'utilisateur est redirigé vers la page de de résultat de recherche")
+    public void lUtilisateurEstRedirigéVersLaPageDeDeRésultatDeRecherche() {
+        assertTrue(searchPage.isSearchPageDisplayed());
+    }
 }

@@ -56,7 +56,7 @@ public class HomePage extends BasePage {
     /**
      * 5. vérifier que le logo nous redirige vers la page d'accueil
      */
-    @FindBy(xpath = "//div[@id = 'header_logo']/a")
+    @FindBy(xpath = "//div[@id = 'header_logo']")
     private WebElement logo;
 
 

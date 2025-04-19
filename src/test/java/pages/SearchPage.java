@@ -17,6 +17,9 @@ public class SearchPage {
     @FindBy(css = ".ac_results li")
     WebElement suggestion;
 
+    @FindBy(id = "search")
+    WebElement searchPage;
+
     @FindBy(css = "h1")
     WebElement productTitle;
 
@@ -69,6 +72,15 @@ public class SearchPage {
 
     public boolean hasSearchResults() {
         return !searchResults.isEmpty();
+    }
+
+    public boolean isSearchPageDisplayed() {
+        try {
+            WebDriverWait wait = new WebDriverWait(DriverHelper.driver, Duration.ofSeconds(5));
+            return wait.until(ExpectedConditions.visibilityOf(searchPage)).isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
 

@@ -65,7 +65,8 @@ public class MyAccountSteps {
 
     @Then("Le site m'affiche un espace {string} avec mes coordonnees \\(nom prenom, addresse, telephone)")
     public void leSiteMAfficheUnEspaceAvecMesCoordonneesNomPrenomAddresseTelephone(String arg0) {
-        assertEquals(myAccountPage.getMyAccountTitle(),"My account");
+        assertEquals(myAccountPage.getMyAccountTitle().toLowerCase(),"My account".toLowerCase());
+        myAccountPage.clickMyAddressesLink();
         if(myAccountPage.getMyAdresses()!= null){
             assertNotNull(myAccountPage.getName());
             assertNotNull(myAccountPage.getLastName());

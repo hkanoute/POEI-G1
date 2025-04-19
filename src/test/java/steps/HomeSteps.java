@@ -65,7 +65,7 @@ public class HomeSteps {
     }
 
     @And("L'onglet {string} redirige vers le site Prestashop")
-    public void lOngletRedirigeVersLeSitePrestashop(String blog) {
+    public void lOngletRedirigeVersLeSitePrestashop(String blog) throws InterruptedException {
         String mainWindowHandle = driver.getWindowHandle();
         homePage.clicOnBlog();
         blog = driver.getWindowHandle();
@@ -78,6 +78,8 @@ public class HomeSteps {
         }
 
         blog = driver.getCurrentUrl();
+
+        Thread.sleep(2000);
         assertEquals("https://prestashop.com/blog/", blog);
         driver.close();
         driver.switchTo().window(mainWindowHandle);
@@ -103,6 +105,7 @@ public class HomeSteps {
 
     @When("Cliquer sur logo {string}")
     public void cliquerSurLogo(String logo) {
+
         homePage.clickOnLogo();
         logo = driver.getCurrentUrl();
         assertEquals("http://www.automationpractice.pl/index.php", logo);

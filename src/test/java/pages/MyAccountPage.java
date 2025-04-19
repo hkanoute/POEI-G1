@@ -45,19 +45,8 @@ public class MyAccountPage extends BasePage {
     @FindBy(xpath = "//li/a[@title='Addresses']")
     private WebElement myAddressesLink;
 
-    @FindBy (xpath="//h3")
+    @FindBy(xpath = "//h3")
     private WebElement myAdresses;
-
-
-    public String getPhone() {
-        return phone.getText();
-    }
-    public String getAddress() {
-        return adresses.getText();
-    }
-    public String getMyAdresses() {
-        return myAdresses.getText();
-    }
 
     @FindBy(id = "firstname")
     private WebElement firstName;
@@ -83,11 +72,37 @@ public class MyAccountPage extends BasePage {
     @FindBy(id = "phone")
     private WebElement phone;
 
+    @FindBy(id = "submitAddress")
+    private WebElement submitAddress;
+
+    @FindBy(xpath = "//ul[@class = \"last_item item box\"]/li[2]/span[1]")
+    private WebElement first_name_address;
+
+    @FindBy(xpath = "//ul[@class = \"last_item item box\"]/li[2]/span[2]")
+    private WebElement last_name_address;
+
+    @FindBy(xpath = "//ul[@class = \"last_item item box\"]/li[4]/span[@class='address_address1']")
+    private WebElement address;
+
+    @FindBy(xpath = "//ul[@class = \"last_item item box\"]/li[7]/span[@class='address_phone']")
+    private WebElement phone_address;
 
 
+    public String getPhone() {
+        return phone_address.getText();
+    }
+
+    public String getAddress() {
+        return address.getText();
+    }
+
+    public String getMyAdresses() {
+        return myAdresses.getText();
+    }
     public void clickMyAddressesLink() {
         myAddressesLink.click();
     }
+
     public void clickMyAccountLink() {
         myAccountLink.click();
     }
@@ -95,14 +110,14 @@ public class MyAccountPage extends BasePage {
     public String getMyAccountTitle() {
         return myAccountTitle.getText();
     }
-public String getName()
-{
-    return firstName.getText();
-}
-public String getLastName()
-{
-    return  lastName.getText();
-}
+
+    public String getName() {
+        return first_name_address.getText();
+    }
+
+    public String getLastName() {
+        return last_name_address.getText();
+    }
 
     public void lUtilisateurVoitLAccèsÀ(String arg0) {
         switch (arg0) {
@@ -155,5 +170,9 @@ public String getLastName()
         countrySelectDropdown.selectByVisibleText("United States");
 
         phone.sendKeys("1234567890");
+
+        submitAddress.click();
+
+
     }
 }
