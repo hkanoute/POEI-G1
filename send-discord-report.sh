@@ -10,10 +10,24 @@ if [ ! -f "$JSON_FILE" ]; then
   exit 1
 fi
 
-TOTAL=$(jq '. | length' "$JSON_FILE")
-PASSED=$(jq '[.[] | select(.elements[].steps[].result.status == "passed")] | length' "$JSON_FILE")
-FAILED=$((TOTAL - PASSED))
+# Utilise ton jq complet pour extraire les stats
+read -r TOTAL PASSED FAILED <<< $(jq '
+  reduce .[].elements[] as $e (
+    {"total": 0, "passed": 0, "failed": 0};
+    if $e.type == "scenario" then 
+      .total += 1 |
+      if ($e.steps[].result.status == "passed") then 
+        .passed += 1 
+      else 
+        .failed += 1 
+      end 
+    else . end
+  ) | 
+  .failed = (.total - .passed) | 
+  "\(.total) \(.passed) \(.failed)"
+' "$JSON_FILE")
 
+# Format embed Discord
 EMBED=$(cat <<EOF
 {
   "embeds": [
