@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,7 +10,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.DriverHelper;
 
 import java.time.Duration;
+
+import static org.junit.Assert.assertTrue;
+
 public class RegisterPage extends BasePage {
+    private boolean skipFormSteps = false;
+    String generatedEmail;
+
     @FindBy(id = "email_create")
     private WebElement emailInput;
 
@@ -58,6 +65,9 @@ public class RegisterPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='alert alert-danger']//li")
     private WebElement registrationError;
+
+    @FindBy(xpath = "//a[@class='login']")
+    private WebElement loginButton;
 
     public void submitEmail(String email) {
         emailInput.sendKeys(email);
@@ -122,4 +132,44 @@ public class RegisterPage extends BasePage {
     public WebElement getEmail() {
         return this.emailInput;
     }
+    public void register(String email, String genre, String prenom, String nom, String password, String dateNaissance, String newsletter, String messageFinal) {
+        // 1. Email
+        loginButton.click();
+        if (email.equals("random")) {
+            generatedEmail = "user" + System.currentTimeMillis() + "@mail.com";
+           submitEmail(generatedEmail);
+        } else {
+            submitEmail(email);
+        }
+
+        // 2. Clic sur REGISTER
+        clickRegister();
+
+        // 3. Gestion du formulaire ou message d'erreur
+        /*String actualError = getEmailErrorMessage();
+        if (!actualError.isEmpty()) {
+            System.out.println("🔍 Message d'erreur reçu : " + actualError);
+            assertTrue("Le message d'erreur ne correspond pas", actualError.contains(messageFinal));
+            skipFormSteps = true;
+            return;
+        }*/
+
+        skipFormSteps = false; // s'assurer qu'on continue si pas d'erreur
+
+        // 4. Suite du formulaire
+        selectGender(genre);
+        fillName(prenom, nom);
+        fillPassword(password);
+        selectDate(dateNaissance);
+        checkNewsletter(newsletter);
+
+        // 5. Vérification finale
+      /*  if (!messageFinal.equalsIgnoreCase("Fail")) {
+            String finalMessage = getFinalMessage();
+            System.out.println("✅ Message affiché : " + finalMessage);
+            assertTrue(finalMessage.contains(messageFinal));
+        }*/
+        clickRegister();
+    }
+
 }

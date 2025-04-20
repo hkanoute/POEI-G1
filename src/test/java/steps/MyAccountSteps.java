@@ -4,14 +4,18 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.support.PageFactory;
 import pages.MyAccountPage;
+import pages.RegisterPage;
+import utils.DriverHelper;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class MyAccountSteps {
     private MyAccountPage myAccountPage;
-
+    private boolean skipFormSteps = false;
+    RegisterPage registerPage = PageFactory.initElements(DriverHelper.driver, RegisterPage.class);
+    String generatedEmail;
     public MyAccountSteps() {
         myAccountPage = new MyAccountPage();
     }
@@ -56,25 +60,65 @@ public class MyAccountSteps {
         myAccountPage.clickMyAccountLink();
 
     }
-
+/**
+     * Vérifie que l'utilisateur est sur la page "Mon Compte"
+ * CE test doit etre effectué avec un compte utilisateur ayant une adresse existante
+     */
     @Then("Le site m'affiche un espace {string} avec mes coordonnees \\(nom prenom, addresse, telephone)")
     public void leSiteMAfficheUnEspaceAvecMesCoordonneesNomPrenomAddresseTelephone(String arg0) {
-        assertEquals(myAccountPage.getMyAccountTitle(),"My account");
-        if(myAccountPage.getMyAdresses()!= null){
+        assertEquals(myAccountPage.getMyAccountTitle(),"MY ADDRESSES");
+
+
             assertNotNull(myAccountPage.getName());
             assertNotNull(myAccountPage.getLastName());
             assertNotNull(myAccountPage.getAddress());
             assertNotNull(myAccountPage.getPhone());
-        }
+
+
 
     }
 
-    @And("Le site me permet de mettre à jour mes coordonnes")
+    @Then("Le site me permet de mettre à jour mes coordonnes")
     public void leSiteMePermetDeMettreÀJourMesCoordonnes() {
+        myAccountPage.clickMyAddressesLink();
+        assertEquals(myAccountPage.getMyAccountTitle(),"MY ADDRESSES");
+        myAccountPage.clickUpdateButton();
+        myAccountPage.updateAddress();
+    }
+
+    @Then("Le site me permet d'ajouter une autre adresse")
+    public void leSiteMePermetDAjouterUneAutreAdresse() {
+        myAccountPage.clickMyAddressesLink();
+        myAccountPage.clickAddNewAddressButton();
+        myAccountPage.addSecondAdress();
+    }
+
+    @When("Je clique sur le bouton Add my first Address")
+    public void jeCliqueSurLeBoutonAddMyFirstAddress() {
+        myAccountPage.clickMyAddressesLink();
+        myAccountPage.clickAddNewAddressButton();
+        myAccountPage.addNewAdress();
 
     }
 
-    @And("Le site me permet d'ajouter une autre adresse")
-    public void leSiteMePermetDAjouterUneAutreAdresse() {
+    @And("Je peux modifier les champs obligatoire du formulaire")
+    public void jePeuxModifierLesChampsObligatoireDuFormulaire() {
+
+        myAccountPage.clickUpdateButton();
+        myAccountPage.updateAddress();
+    }
+
+    @Given("Je viens de m'inscrire sur le site")
+    public void jeViensDeMInscrireSurLeSite() {
+        registerPage.register("random",
+                "Mr",
+                "Jean",
+                "Dupont",
+                "Password123!",
+                "12/04/1990",
+                "oui",
+                "Bienvenue sur votre compte");
+
+
     }
 }
