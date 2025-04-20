@@ -13,30 +13,30 @@ pipeline {
     stages {
         stage('Build'){
             steps{
-                bat 'mvn clean'
+                sh 'mvn clean'
             }
         }
         stage('Curl') {
             steps {
                 script{
-                    bat 'curl -H "Content-Type: application/json" -X POST --data "{ \\"client_id\\": \\"%JIRA_ID_USR%\\",\\"client_secret\\": \\"%JIRA_ID_PSW%\\" }"  https://xray.cloud.getxray.app/api/v2/authenticate >token.txt'
-                    bat """
+                    sh 'curl -H "Content-Type: application/json" -X POST --data "{ \\"client_id\\": \\"%JIRA_ID_USR%\\",\\"client_secret\\": \\"%JIRA_ID_PSW%\\" }"  https://xray.cloud.getxray.app/api/v2/authenticate >token.txt'
+                    sh """
                                         set /p TOKEN=<token.txt
                                         curl -X GET "https://xray.cloud.getxray.app/api/v2/export/cucumber?keys=${KEYS}" ^
                                         -H "Authorization: Bearer %TOKEN%" ^
                                         -o features.zip
                                     """
-                    bat 'tar -xf features.zip -C src/test/resources/features/'
+                    sh 'tar -xf features.zip -C src/test/resources/features/'
                 }
             }
         }
         stage('Test'){
             steps{
-                bat 'mvn test'
+                sh 'mvn test'
             }
             post {
                 always {
-                    bat """
+                    sh """
                         set /p TOKEN=<token.txt
                         curl -H "Content-Type: application/json" -X POST -H "Authorization: Bearer %TOKEN%" ^
                         --data @"target/cucumber.json" https://xray.cloud.getxray.app/api/v2/import/execution/cucumber
