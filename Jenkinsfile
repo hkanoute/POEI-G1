@@ -8,7 +8,7 @@ pipeline {
     environment {
         JIRA_ID = credentials('JIRA_IDS')
         KEYS = "${params.KEYS}"
-        DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1363533361230119103/RfREgncYSYbTKzNOisEMoz_BHpF3tLIu3Ab7Drt4HN0UAAUo20WKuqz2nSDtSnFqGsnp"
+        DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1359154405147934992/2RwoZD57gNSStkB8yxAUT4O7jAe7OOAECZTCuMj9tDW6RBHYUaCjgon1E05MoTjsaQlg"
     }
 
     stages {
