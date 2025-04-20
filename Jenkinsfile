@@ -27,7 +27,6 @@ pipeline {
                         chmod +x send-discord-report.sh
                         ./send-discord-report.sh "${DISCORD_WEBHOOK}" "$JOB_NAME" "$BUILD_URL"
                     '''
-                    junit 'target/surefire-reports/*.xml'
                     cucumber fileIncludePattern: 'target/cucumber.json'
                     cleanWs()
                 }
