@@ -34,9 +34,10 @@ public class DriverHelper {
         String remoteUrl = ConfigReader.getProperty("REMOTE_URL");
 
         if (isRemote) {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName(browser.equalsIgnoreCase("Edge") ? "MicrosoftEdge" : browser.toLowerCase());
-            driver = new RemoteWebDriver(new URL(remoteUrl), capabilities);
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--user-data-dir=/tmp/profile-" + UUID.randomUUID());
         } else {
             switch (browser.toLowerCase()) {
                 case "firefox":
