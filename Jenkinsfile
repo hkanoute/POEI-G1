@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        chmod +x ./run-tests.sh
+                        chmod +x ./xray.sh
                         ./xray.sh "${JIRA_ID_USR}" "${JIRA_ID_PSW}" "${KEYS}"
                     '''
                 }
