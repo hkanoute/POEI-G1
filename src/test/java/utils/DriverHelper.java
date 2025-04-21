@@ -17,6 +17,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
+/**
+ * DriverHelper class to manage WebDriver instances.
+ */
 public class DriverHelper {
     public static WebDriver driver;
 
@@ -59,6 +62,10 @@ public class DriverHelper {
         driver.get(ConfigReader.getProperty("BASE_URL"));
     }
 
+    /**
+     * Method to take a screenshot if a step fails.
+     * @param scenario
+     */
     @After
     public void takeScreenShotsOnStepFailure(Scenario scenario) {
         if (scenario.isFailed()) {
@@ -66,7 +73,6 @@ public class DriverHelper {
             scenario.attach(screenshot, "image/png", scenario.getName());
         }
         driver.quit();
-
     }
 
 }
