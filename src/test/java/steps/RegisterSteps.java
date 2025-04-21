@@ -97,8 +97,4 @@ public class RegisterSteps {
         }
     }
 
-    @Given("Je viens de m'inscrire sur le site")
-    public void jeViensDeMInscrireSurLeSite() {
-        registerPage.registerRandomUser("Mr", "John", "Doe", "test123", "01/01/1990");
-    }
 }

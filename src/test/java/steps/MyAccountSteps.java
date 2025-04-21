@@ -13,10 +13,12 @@ import static org.junit.Assert.*;
 public class MyAccountSteps {
     private final MyAccountPage myAccountPage;
     private boolean skipFormSteps = false;
-    RegisterPage registerPage = PageFactory.initElements(DriverHelper.driver, RegisterPage.class);
+    RegisterPage registerPage;
     String generatedEmail;
+
     public MyAccountSteps() {
         myAccountPage = new MyAccountPage();
+        registerPage = new RegisterPage();
     }
 
 
@@ -54,10 +56,8 @@ public class MyAccountSteps {
 
     @And("Je peux modifier les champs obligatoire du formulaire")
     public void jePeuxModifierLesChampsObligatoireDuFormulaire() {
-
         myAccountPage.fillMandatoryFieldsForAddress();
     }
-
 
 
     @When("Je clique sur le lien {string}")
@@ -65,31 +65,30 @@ public class MyAccountSteps {
         myAccountPage.clickMyAccountLink();
 
     }
-/**
+
+    /**
      * Vérifie que l'utilisateur est sur la page "Mon Compte"
- * CE test doit etre effectué avec un compte utilisateur ayant une adresse existante
+     * CE test doit etre effectué avec un compte utilisateur ayant une adresse existante
      */
     @Then("Le site m'affiche un espace {string} avec mes coordonnees \\(nom prenom, addresse, telephone)")
     public void leSiteMAfficheUnEspaceAvecMesCoordonneesNomPrenomAddresseTelephone(String arg0) {
-        assertEquals(myAccountPage.getMyAccountTitle(),"MY ADDRESSES");
+        assertEquals(myAccountPage.getMyAccountTitle().toLowerCase(), "My account".toLowerCase());
 
-
-        assertEquals(myAccountPage.getMyAccountTitle().toLowerCase(),"My account".toLowerCase());
         myAccountPage.clickMyAddressesLink();
-        if(myAccountPage.getMyAdresses()!= null){
+        if (myAccountPage.getMyAdresses() != null) {
             assertNotNull(myAccountPage.getName());
             assertNotNull(myAccountPage.getLastName());
             assertNotNull(myAccountPage.getAddress());
             assertNotNull(myAccountPage.getPhone());
 
 
-
+        }
     }
 
     @Then("Le site me permet de mettre à jour mes coordonnes")
     public void leSiteMePermetDeMettreÀJourMesCoordonnes() {
         myAccountPage.clickMyAddressesLink();
-        assertEquals(myAccountPage.getMyAccountTitle(),"MY ADDRESSES");
+        assertEquals(myAccountPage.getMyAccountTitle(), "MY ADDRESSES");
         myAccountPage.clickUpdateButton();
         myAccountPage.updateAddress();
     }
@@ -101,17 +100,16 @@ public class MyAccountSteps {
         myAccountPage.addSecondAdress();
     }
 
-    @When("Je clique sur le bouton Add my first Address")
+   /* @When("Je clique sur le bouton Add my first Address")
     public void jeCliqueSurLeBoutonAddMyFirstAddress() {
         myAccountPage.clickMyAddressesLink();
         myAccountPage.clickAddNewAddressButton();
         myAccountPage.addNewAdress();
 
-    }
+    }*/
 
-    @And("Je peux modifier les champs obligatoire du formulaire")
-    public void jePeuxModifierLesChampsObligatoireDuFormulaire() {
-
+    @And("Je peux mettre a jour mes coordonnes")
+    public void jePeuxMettreAJourMesCoordonnes() {
         myAccountPage.clickUpdateButton();
         myAccountPage.updateAddress();
     }

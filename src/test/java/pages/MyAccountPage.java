@@ -89,30 +89,36 @@ public class MyAccountPage extends BasePage {
     @FindBy (xpath = "//ul[@class = \"last_item item box\"]/li[4]/span[@class='address_address1']")
     private WebElement address;
     @FindBy(xpath="//ul[@class = \"last_item item box\"]/li[7]/span[@class='address_phone']")
-    private WebElement phone;
+    private WebElement phone_address;
     @FindBy(xpath = "//a[@title='Add an address']")
     private WebElement addNewAddressButton;
-    @FindBy(xpath = "//input[@id='address1']")
-    private WebElement address1;
-    @FindBy(id = "city")
-    private WebElement city;
+
+
     @FindBy(id="id_state")
     private WebElement state;
+
     @FindBy(id="postcode")
     private WebElement postCode;
+
     @FindBy(id="id_country")
     private WebElement country;
+
     @FindBy(id="phone_mobile")
     private WebElement phoneMobile;
+
     @FindBy(id="submitAddress")
     private WebElement saveButton;
+
     @FindBy(xpath = "//p[@class=\"alert alert-warning\"]/a")
     private WebElement alertNoAdresses;
+
     @FindBy(xpath = "//a[@title='Update']")
     private WebElement updateButton;
+
     @FindBy(id="alias")
     private WebElement adressTitle;
-    String pageText = driver.getPageSource();
+
+
     @FindBy(xpath="//div[@class='addresses']/p/strong")
     private WebElement adressesList;
 
@@ -120,9 +126,12 @@ public class MyAccountPage extends BasePage {
     public String getAdressesListText() {
         return adressesList.getText();
     }
+
     public String getAlertNoAdressesText() {
         return alertNoAdresses.getText();
     }
+
+    String pageText = driver.getPageSource();
     public void addNewAdress(){
         inputFirstName.sendKeys("auralion");
         inputLastName.sendKeys("second user last name");
@@ -176,12 +185,15 @@ public class MyAccountPage extends BasePage {
     public void clickAddNewAddressButton() {
         addNewAddressButton.click();
     }
+
     public void clickUpdateButton() {
         updateButton.click();
     }
+
     public String getNewAddressButtonText(){
         return addNewAddressButton.getText();
     }
+
     public String getPhone() {
         return phone_address.getText();
     }
