@@ -16,27 +16,16 @@ import static utils.DriverHelper.driver;
  * This class contains methods to interact with the home page elements.
  */
 public class HomePage extends BasePage {
-    /**
-     * tester la page d'accueil:
-     * 1. vérifier que la barre de menu est affichée
-     */
 
     @FindBy(xpath = "//span[@class='shop-phone']")
     private WebElement menu_noir;
-    /**
-     * 2. vérifier que le lien contact us est affiché
-     */
+
     @FindBy(id = "contact-link")
     private WebElement contact_us;
-    /**
-     * 3. vérifier que le lien login est affiché
-     */
 
     @FindBy(xpath = "//a[@class='login']")
     private WebElement loginButton;
-    /**
-     * 3. vérifier que les onglets "women", dresses et t-shirts sont affichés et nous redirignet vers les articles de leur catégorie
-     */
+
     @FindBy(xpath = "//a[@title='Women']")
     private WebElement women;
 
@@ -48,21 +37,21 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//a[@title='Blog']")
     private WebElement blog;
-    /**
-     * 4. vérifier que le slider de publicite nous redirige vers le site prestashop
-     */
+
     @FindBy(id = "homepage-slider")
     private WebElement pub;
-    /**
-     * 5. vérifier que le logo nous redirige vers la page d'accueil
-     */
+
     @FindBy(xpath = "//div[@id = 'header_logo']")
     private WebElement logo;
-
 
     @FindBy(id = "center_column")
     private WebElement contact_us_page;
 
+    /**
+     * Method that returns the text of the menu noir (black menu).
+     *
+     * @return the text of the menu noir as a String.
+     */
     public String menuAffiche() {
         return menu_noir.getText();
     }
@@ -76,43 +65,74 @@ public class HomePage extends BasePage {
     }
 
 
+    /**
+     * Method to get the title of the home page.
+     */
     public void clickOnContactUs() {
         contact_us.click();
     }
 
-
+    /**
+     * Method that allows the user to click on the login button.
+     */
     public void clickLoginButton() {
         loginButton.click();
     }
 
+    /**
+     * Method that allows the user to click on the women link.
+     */
     public void clickOnWomen() {
         women.click();
     }
 
+    /**
+     * Method that allows the user to click on the dresses link.
+     */
     public void clickOnDresses() {
         dresses.click();
     }
 
+    /**
+     * Method that allows the user to click on the t-shirts link.
+     */
     public void clickOnTshirts() {
         t_shirts.click();
     }
 
+    /**
+     * Method that allows the user to click on the blog link.
+     */
     public void clicOnBlog() {
         blog.click();
     }
 
+    /**
+     * Method that allows the user to click on the pub.
+     */
     public void clicOnPub() {
         pub.click();
     }
 
+    /**
+     * Method return the login button text.
+     * @return String
+     */
     public String getLoginButtonText() {
         return loginButton.getText();
     }
 
+    /**
+     * Method that allows to click on the logo.
+     */
     public void clickOnLogo() {
         logo.click();
     }
 
+    /**
+     * Method that allows to verify if the logo is displayed.
+     * @return boolean
+     */
     public boolean isLogoDisplayed() {
         return logo.isDisplayed();
     }

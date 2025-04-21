@@ -11,6 +11,12 @@ import utils.ConfigReader;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static utils.DriverHelper.driver;
+
+/**
+ * HomeSteps class contains step definitions for the home page of the application.
+ * It includes methods to interact with elements on the home page and verify their behavior.
+ * These are used in Cucumber tests.
+ */
 public class HomeSteps {
 
     private final HomePage homePage;
@@ -23,7 +29,7 @@ public class HomeSteps {
 
 
     @Then("La barre de menu noire est affichée")
-    public void laBarreDeMenuNoireEstAffichée() {
+    public void laBarreDeMenuNoireEstAffichee() {
         assertEquals("Call us now: 0123-456-789", homePage.menuAffiche());
     }
 
@@ -50,7 +56,7 @@ public class HomeSteps {
     }
 
     @And("Les onglets {string}, {string} et {string} redirigent vers les articles de leur catégorie")
-    public void lesOngletsEtRedirigentVersLesArticlesDeLeurCatégorie(String women, String dresses, String tshirts) throws InterruptedException {
+    public void lesOngletsEtRedirigentVersLesArticlesDeLeurCategorie(String women, String dresses, String tshirts) throws InterruptedException {
         homePage.clickOnWomen();
         women = driver.getCurrentUrl();
         assertEquals("http://www.automationpractice.pl/index.php?id_category=3&controller=category", women);
@@ -86,7 +92,7 @@ public class HomeSteps {
     }
 
     @And("Les publicités redirigent vers le site partenaire Prestashop")
-    public void lesPublicitésRedirigentVersLeSitePartenairePrestashop() {
+    public void lesPublicitesRedirigentVersLeSitePartenairePrestashop() {
         homePage.navigateToHomePage();
         homePage.clicOnPub();
         String pub = driver.getWindowHandle();

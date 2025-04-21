@@ -1,14 +1,16 @@
 package pages;
 
-import org.junit.Assert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-
-import static org.junit.Assert.assertTrue;
 import static utils.DriverHelper.driver;
 
+
+/**
+ * MyAccountPage class represents the "My Account" page of the application.
+ */
 public class MyAccountPage extends BasePage {
     private RegisterPage registerPage;
 
@@ -18,7 +20,6 @@ public class MyAccountPage extends BasePage {
     public MyAccountPage() {
         this.registerPage = new RegisterPage();
     }
-
 
     @FindBy(xpath = "//ul[@class= \"myaccount-link-list\"]/li[1]")
     private WebElement myFirstAddress;
@@ -34,9 +35,7 @@ public class MyAccountPage extends BasePage {
 
     @FindBy(xpath = "//a[@title = \"Return to Home\"]")
     private WebElement homeButton;
-    /**
-     * element representant la page my account
-     */
+
     @FindBy(xpath = "//h1")
     private WebElement myAccountTitle;
 
@@ -84,15 +83,18 @@ public class MyAccountPage extends BasePage {
 
     @FindBy(id="firstname")
     private WebElement inputFirstName;
+
     @FindBy(id="lastname")
     private   WebElement inputLastName;
+
     @FindBy (xpath = "//ul[@class = \"last_item item box\"]/li[4]/span[@class='address_address1']")
     private WebElement address;
+
     @FindBy(xpath="//ul[@class = \"last_item item box\"]/li[7]/span[@class='address_phone']")
     private WebElement phone_address;
+
     @FindBy(xpath = "//a[@title='Add an address']")
     private WebElement addNewAddressButton;
-
 
     @FindBy(id="id_state")
     private WebElement state;
@@ -118,20 +120,32 @@ public class MyAccountPage extends BasePage {
     @FindBy(id="alias")
     private WebElement adressTitle;
 
-
     @FindBy(xpath="//div[@class='addresses']/p/strong")
     private WebElement adressesList;
 
 
+    /**
+     * Method to get the text of the "Adresses" list.
+     * @return The text of the "Adresses" list.
+     */
     public String getAdressesListText() {
         return adressesList.getText();
     }
 
+    /**
+     * Method to get the text of the alert message when there are no addresses.
+     * @return The text of the alert message.
+     */
     public String getAlertNoAdressesText() {
         return alertNoAdresses.getText();
     }
 
+
     String pageText = driver.getPageSource();
+
+    /**
+     * Methode to add a new address.
+     */
     public void addNewAdress(){
         inputFirstName.sendKeys("auralion");
         inputLastName.sendKeys("second user last name");
@@ -146,6 +160,10 @@ public class MyAccountPage extends BasePage {
         saveButton.click();
 
     }
+
+    /**
+     * Method to add a second address.
+     */
     public void addSecondAdress(){
         inputFirstName.clear();
         inputFirstName.sendKeys("second user");
@@ -162,6 +180,10 @@ public class MyAccountPage extends BasePage {
         adressTitle.sendKeys("second address");
         saveButton.click();
     }
+
+    /**
+     * Method to update the address.
+     */
     public void updateAddress(){
         inputFirstName.clear();
         inputFirstName.sendKeys("john");
@@ -182,50 +204,98 @@ public class MyAccountPage extends BasePage {
         phoneMobile.sendKeys("1234567890");
         saveButton.click();
     }
+
+    /**
+     * Method to click on the "Add New Address" button.
+     */
     public void clickAddNewAddressButton() {
         addNewAddressButton.click();
     }
 
+    /**
+     * Method to click on the "Update" button.
+     */
     public void clickUpdateButton() {
         updateButton.click();
     }
 
+    /**
+     * Method to get the text of the "Update" button.
+     * @return The text of the "Update" button.
+     */
     public String getNewAddressButtonText(){
         return addNewAddressButton.getText();
     }
 
+
+    /**
+     * Method to get the text of phone.
+     * @return The text of the phone.
+     */
     public String getPhone() {
         return phone_address.getText();
     }
 
+    /**
+     * Method to get the text of the address.
+     * @return The text of the address.
+     */
     public String getAddress() {
         return address.getText();
     }
 
+    /**
+     * Method to get the text of the "Adresses"
+     * @return The text of the "Adresses"
+     */
     public String getMyAdresses() {
         return myAdresses.getText();
     }
+
+    /**
+     * Method to click on the "My Addresses" link.
+     */
     public void clickMyAddressesLink() {
         myAddressesLink.click();
     }
 
+    /**
+     * Method to click on the "My Account" link.
+     */
     public void clickMyAccountLink() {
         myAccountLink.click();
     }
 
+    /**
+     * Method to get the text of the "My Account" title.
+     * @return The text of the "My Account" as string.
+     */
     public String getMyAccountTitle() {
         return myAccountTitle.getText();
     }
 
+    /**
+     * Method to get the text of the first name address.
+     * @return string
+     */
     public String getName() {
         return first_name_address.getText();
     }
 
+    /**
+     * Method to get the text of the last name address.
+     * @return string
+     */
     public String getLastName() {
         return last_name_address.getText();
     }
 
-    public void lUtilisateurVoitLAccèsÀ(String arg0) {
+
+    /**
+     * Method to verify if the user can access the specified section.
+     * @param arg0
+     */
+    public void voitAccesA(String arg0) {
         switch (arg0) {
             case "Historique":
                 historique.click();
@@ -241,27 +311,47 @@ public class MyAccountPage extends BasePage {
         }
     }
 
+
+    /**
+     * Method to verify if the body ID contains the specified ID.
+     * @param id
+     */
     public void bodyIdContains(String id) {
         String bodyId = driver.findElement(By.tagName("body")).getDomAttribute("id");
         assert bodyId != null;
     }
 
+    /**
+     * Method to click on the "My First Address" button.
+     */
     public void clickAddMyFirstAddressButton() {
         myFirstAddress.click();
     }
 
+    /**
+     * Methode that allows to verify if the user is on the address page.
+     */
     public void verifyAddressPage() {
         bodyIdContains("address");
     }
 
+    /**
+     * Method to click on the "Home" button.
+     */
     public void clickHomeButton() {
         homeButton.click();
     }
 
+    /**
+     * Method to verify if the user is on the home page.
+     */
     public void verifyHomePage() {
         bodyIdContains("index");
     }
 
+    /**
+     * Method to fill in the mandatory fields for the address.
+     */
     public void fillMandatoryFieldsForAddress() {
         firstName.sendKeys("John");
         lastName.sendKeys("Doe");

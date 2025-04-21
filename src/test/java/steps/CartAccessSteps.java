@@ -4,8 +4,13 @@ import org.openqa.selenium.support.PageFactory;
 import pages.CommonPage;
 import pages.CartPage;
 import utils.DriverHelper;
-
 import static org.junit.Assert.assertTrue;
+
+/**
+ * CartAccessSteps class contains step definitions for accessing the cart.
+ * It includes methods to navigate to different pages and verify the cart button.
+ * These are used in Cucumber tests.
+ */
 public class CartAccessSteps {
 
     CommonPage commonPage = PageFactory.initElements(DriverHelper.driver, CommonPage.class);

@@ -7,6 +7,8 @@ import utils.DriverHelper;
  * Base page class for all page object classes.
  * This class initializes the web elements using PageFactory.
  */
+
+
 public abstract class BasePage {
 
     /**

@@ -6,13 +6,17 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.MyAccountPage;
 import pages.RegisterPage;
-import utils.DriverHelper;
+
 
 import static org.junit.Assert.*;
 
+/**
+ * MyAccountSteps class contains step definitions for the "My Account" page of the application.
+ * It includes methods to interact with elements on the "My Account" page and verify their behavior.
+ * These are used in Cucumber tests.
+ */
 public class MyAccountSteps {
     private final MyAccountPage myAccountPage;
-    private boolean skipFormSteps = false;
     RegisterPage registerPage;
     String generatedEmail;
 
@@ -22,12 +26,10 @@ public class MyAccountSteps {
     }
 
 
-    /**
-     * Vérifie que l'utilisateur est sur la page "Mon Compte"
-     */
+
     @Then("Je voit l'accès à la {string}")
-    public void jeVoitLAccèsÀLa(String arg0) {
-        myAccountPage.lUtilisateurVoitLAccèsÀ(arg0);
+    public void jeVoisAccesA(String arg0) {
+        myAccountPage.voitAccesA(arg0);
     }
 
     /**
@@ -40,7 +42,7 @@ public class MyAccountSteps {
 
 
     @Then("Je suis redirigé vers la page de saisie d'adresse")
-    public void jeSuisRedirigéVersLaPageDeSaisieDAdresse() {
+    public void jeSuisRedirigeVersLaPageDeSaisieDAdresse() {
         myAccountPage.verifyAddressPage();
     }
 
@@ -50,7 +52,7 @@ public class MyAccountSteps {
     }
 
     @Then("Je est redirigé vers la page d’accueil")
-    public void ilEstRedirigéVersLaPageDAccueil() {
+    public void ilEstRedirigeVersLaPageDAccueil() {
         myAccountPage.verifyHomePage();
     }
 
@@ -66,10 +68,7 @@ public class MyAccountSteps {
 
     }
 
-    /**
-     * Vérifie que l'utilisateur est sur la page "Mon Compte"
-     * CE test doit etre effectué avec un compte utilisateur ayant une adresse existante
-     */
+
     @Then("Le site m'affiche un espace {string} avec mes coordonnees \\(nom prenom, addresse, telephone)")
     public void leSiteMAfficheUnEspaceAvecMesCoordonneesNomPrenomAddresseTelephone(String arg0) {
         assertEquals(myAccountPage.getMyAccountTitle().toLowerCase(), "My account".toLowerCase());
@@ -100,13 +99,6 @@ public class MyAccountSteps {
         myAccountPage.addSecondAdress();
     }
 
-   /* @When("Je clique sur le bouton Add my first Address")
-    public void jeCliqueSurLeBoutonAddMyFirstAddress() {
-        myAccountPage.clickMyAddressesLink();
-        myAccountPage.clickAddNewAddressButton();
-        myAccountPage.addNewAdress();
-
-    }*/
 
     @And("Je peux mettre a jour mes coordonnes")
     public void jePeuxMettreAJourMesCoordonnes() {
@@ -116,15 +108,6 @@ public class MyAccountSteps {
 
     @Given("Je viens de m'inscrire sur le site")
     public void jeViensDeMInscrireSurLeSite() {
-        registerPage.register("random",
-                "Mr",
-                "Jean",
-                "Dupont",
-                "Password123!",
-                "12/04/1990",
-                "oui",
-                "Bienvenue sur votre compte");
-
-
+        registerPage.registerRandomUser("Mr", "John", "Doe", "password123", "01/01/1990");
     }
 }

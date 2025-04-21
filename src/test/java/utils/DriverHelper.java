@@ -24,8 +24,10 @@ public class DriverHelper {
     public static WebDriver driver;
 
 
-
-
+    /**
+     * Method to initialize the WebDriver based on the configuration.
+     * @throws MalformedURLException
+     */
     @Before
     public void getDriverHelper() throws MalformedURLException {
         String browser = ConfigReader.getProperty("BROWSER");

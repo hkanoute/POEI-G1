@@ -2,15 +2,16 @@ package steps;
 
 
 import io.cucumber.java.en.*;
-
 import org.openqa.selenium.TimeoutException;
 import pages.RegisterPage;
-
-
 import java.util.Objects;
-
 import static org.junit.Assert.assertTrue;
 
+/**
+ * RegisterSteps class contains step definitions for the registration functionality of the application.
+ * It includes methods to interact with elements on the registration page and verify their behavior.
+ * These are used in Cucumber tests.
+ */
 public class RegisterSteps {
     RegisterPage registerPage;
     private boolean skipFormSteps = false;
@@ -42,7 +43,6 @@ public class RegisterSteps {
     public void verificationMessageOuFormulaire(String form, String messageEmail) {
         if (!messageEmail.isEmpty()) {
             String actualError = registerPage.getEmailErrorMessage();
-            System.out.println("🔍 Message d'erreur reçu : " + actualError);
             assertTrue("Le message d'erreur ne correspond pas", actualError.contains(messageEmail));
             skipFormSteps = true;
         } else {

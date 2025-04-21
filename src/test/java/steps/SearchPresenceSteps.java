@@ -7,6 +7,11 @@ import utils.DriverHelper;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * SearchPresenceSteps class contains step definitions for verifying the presence of search elements on the page.
+ * It includes methods to navigate to different pages and check the visibility of search elements.
+ * These are used in Cucumber tests.
+ */
 public class SearchPresenceSteps {
     SearchPage searchPage = PageFactory.initElements(DriverHelper.driver, SearchPage.class);
 
@@ -26,9 +31,8 @@ public class SearchPresenceSteps {
         assertTrue("La loupe n'est pas visible", searchPage.isSearchButtonDisplayed());
     }
 
-
     @Then("l'utilisateur est redirigé vers la page de de résultat de recherche")
-    public void lUtilisateurEstRedirigéVersLaPageDeDeRésultatDeRecherche() {
+    public void lUtilisateurEstRedirigeVersLaPageDeDeResultatDeRecherche() {
         assertTrue(searchPage.isSearchPageDisplayed());
     }
 }

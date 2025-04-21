@@ -5,6 +5,11 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 
+/**
+ * TestRunner class is the entry point for running Cucumber tests.
+ * It specifies the location of feature files and step definitions.
+ * It also configures the reporting options for the test results.
+ */
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",

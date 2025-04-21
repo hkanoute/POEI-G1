@@ -3,8 +3,13 @@ import io.cucumber.java.en.*;
 import org.openqa.selenium.support.PageFactory;
 import pages.SearchPage;
 import utils.DriverHelper;
-
 import static org.junit.Assert.assertTrue;
+
+/**
+ * SearchSteps class contains step definitions for the search functionality of the application.
+ * It includes methods to interact with elements on the search page and verify their behavior.
+ * These are used in Cucumber tests.
+ */
 public class SearchSteps {
     SearchPage searchPage = PageFactory.initElements(DriverHelper.driver, SearchPage.class);
 

@@ -19,6 +19,12 @@ import java.util.Objects;
 
 import static utils.DriverHelper.driver;
 
+
+/**
+ * LoginSteps class contains step definitions for the login functionality of the application.
+ * It includes methods to interact with elements on the login page and verify their behavior.
+ * These are used in Cucumber tests.
+ */
 public class LoginSteps {
     private final LoginPage loginPage;
     private final NavbarPage navbarPage;
@@ -63,7 +69,7 @@ public class LoginSteps {
      * @param arg0 The expected error message.
      */
     @Then("Le message affiché est {string}")
-    public void leMessageAffichéEst(String arg0) {
+    public void leMessageAfficheEst(String arg0) {
         String expectedMessage = "Authentication failed.";
 
         if (Objects.equals(arg0, "passed")) {
@@ -76,7 +82,7 @@ public class LoginSteps {
     }
 
     @And("L'utilisateur est redirigé vers {string}")
-    public void lUtilisateurEstRedirigéVers(String destination) {
+    public void lUtilisateurEstRedirigeVers(String destination) {
         String actualUrl = driver.getCurrentUrl();
         Assert.assertEquals(destination, actualUrl);
 
@@ -97,8 +103,7 @@ public class LoginSteps {
     /**
      * Step definition for creating an account using a temporary email from Yopmail.
      * This method opens a new tab, generates a random email, and fills in the registration form.
-     *
-     * @throws InterruptedException
+     * @throws InterruptedException If the thread is interrupted during sleep.
      */
     public void createAnAccountFromThrowableMail() throws InterruptedException {
         DriverHelper.driver.switchTo().newWindow(org.openqa.selenium.WindowType.TAB);
@@ -169,7 +174,7 @@ public class LoginSteps {
     }
 
     @And("vérifier si un email de réinitialisation est envoyé")
-    public void vérifierSiUnEmailDeRéinitialisationEstEnvoyé() throws InterruptedException {
+    public void verifierSiUnEmailDeReinitialisationEstEnvoye() throws InterruptedException {
         DriverHelper.driver.switchTo().window(DriverHelper.driver.getWindowHandles().toArray()[1].toString());
         Thread.sleep(6000);
         loginPage.refreshTheTab();

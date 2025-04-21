@@ -18,46 +18,29 @@ import static utils.DriverHelper.driver;
  */
 public class LoginPage extends BasePage {
 
-
-
-    /**
-     * Web element representing the email input field.
-     */
     @FindBy(id = "email")
     private WebElement emailInput;
 
-    /**
-     * Web element representing the password input field.
-     */
     @FindBy(id = "passwd")
     private WebElement passwordInput;
+
     @FindBy(xpath = "//a[@title='Log me out']")
     private WebElement logoutButton;
+
     @FindBy(id="SubmitLogin")
     private WebElement loginButton;
 
-
-
-
-    /**
-     * Web element representing the error message.
-     */
     @FindBy(xpath = "//div[@class='alert alert-danger']//li")
     private WebElement errorMessage;
 
-    /**
-     * Web element representing the forgot password link.
-     */
     @FindBy(xpath = "//a[@title='Recover your forgotten password']")
     private WebElement forgotPasswordLink;
-
 
     @FindBy(id = "email")
     private WebElement forgotEmailInputField;
 
     @FindBy(xpath = "//p[@class=\"submit\"]/button")
     private WebElement resetPasswordButton;
-
 
     @FindBy(id = "refresh")
     private WebElement refreshButton;
@@ -72,9 +55,18 @@ public class LoginPage extends BasePage {
         loginButton.click();
 
     }
+
+    /**
+     * Method to navigate to the login page.
+     */
     public void redirectToLoginPage() {
         driver.get(ConfigReader.getProperty("LOGIN_URL"));
     }
+
+    /**
+     * Method to click the logout button and then click the login button.
+     * This method is used to log out the user and redirect them to the login page.
+     */
     public void clickSignout() {
         logoutButton.click();
         loginButton.click();

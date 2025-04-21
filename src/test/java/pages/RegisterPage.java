@@ -2,14 +2,14 @@ package pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.*;
 
-import java.time.Duration;
 
-import static org.junit.Assert.assertTrue;
-
+/**
+ * Page object class for the registration page.
+ * This class contains methods to interact with the registration page elements.
+ */
 public class RegisterPage extends BasePage {
     private final LoginPage loginPage;
 
@@ -17,9 +17,6 @@ public class RegisterPage extends BasePage {
         super();
         loginPage = new LoginPage();
     }
-
-    private boolean skipFormSteps = false;
-    String generatedEmail;
 
     @FindBy(id = "email_create")
     private WebElement emailInput;
@@ -30,7 +27,6 @@ public class RegisterPage extends BasePage {
     @FindBy(xpath = "//div[@id='create_account_error']//li")
     private WebElement emailErrorMessage;
 
-    // Formulaire "Create an account"
     @FindBy(id = "id_gender1")
     private WebElement genderMr;
 
@@ -73,20 +69,36 @@ public class RegisterPage extends BasePage {
     @FindBy(xpath = "//a[@class='login']")
     private WebElement loginButton;
 
+
+    /**
+     * Method to submit the email for account creation.
+     * @param email The email address to be submitted.
+     */
     public void submitEmail(String email) {
         emailInput.sendKeys(email);
         createAccountBtn.click();
     }
 
+    /**
+     * Method to click the create account button.
+     */
     public void clickCreateAccount() {
         createAccountBtn.click();
     }
 
 
+    /**
+     * Method to get the error message for invalid email.
+     * @return The error message as a String.
+     */
     public String getEmailErrorMessage() {
         return emailErrorMessage.getText();
     }
 
+    /**
+     * Method to get the header text after successful account creation.
+     * @return The header text as a String.
+     */
     public void selectGender(String genre) {
         if (genre.equalsIgnoreCase("Mr")) {
            genderMr.click();
@@ -95,15 +107,28 @@ public class RegisterPage extends BasePage {
         }
     }
 
+    /**
+     * Method to fill in the user's first and last name.
+     * @param prenom
+     * @param nom
+     */
     public void fillName(String prenom, String nom) {
         firstNameInput.sendKeys(prenom);
         lastNameInput.sendKeys(nom);
     }
 
+    /**
+     * Method to fill in the user's password.
+     * @param password The password to be filled in.
+     */
     public void fillPassword(String password) {
         passwordInput.sendKeys(password);
     }
 
+    /**
+     * Method to select the date of birth.
+     * @param date_naissance The date of birth in the format "dd/mm/yyyy".
+     */
     public void selectDate(String date_naissance) {
         if (date_naissance != null && !date_naissance.isEmpty()) {
             String[] parts = date_naissance.split("/");
@@ -113,6 +138,11 @@ public class RegisterPage extends BasePage {
         }
     }
 
+
+    /**
+     * Method to check the newsletter subscription.
+     * @param choix The choice for newsletter subscription ("oui" or "non").
+     */
     public void checkNewsletter(String choix) {
         if (choix.equalsIgnoreCase("oui")) {
             if (!newsletterCheckbox.isSelected()) {
@@ -121,10 +151,17 @@ public class RegisterPage extends BasePage {
         }
     }
 
+    /**
+     * Method to click the register button.
+     */
     public void clickRegister() {
         registerBtn.click();
     }
 
+    /**
+     * Method to get the header text after successful account creation.
+     * @return The header text as a String.
+     */
     public String getFinalMessage() {
         try {
             return successMessage.getText(); // "Your account has been created."
@@ -133,6 +170,10 @@ public class RegisterPage extends BasePage {
         }
     }
 
+    /**
+     * Getter for the email input field.
+     * @return the email element
+     */
     public WebElement getEmail() {
         return this.emailInput;
     }
@@ -157,45 +198,6 @@ public class RegisterPage extends BasePage {
         this.fillPassword(password);
         this.selectDate(date_naissance);
         this.clickRegister();
-    }
-    public void register(String email, String genre, String prenom, String nom, String password, String dateNaissance, String newsletter, String messageFinal) {
-        // 1. Email
-        loginButton.click();
-        if (email.equals("random")) {
-            generatedEmail = "user" + System.currentTimeMillis() + "@mail.com";
-           submitEmail(generatedEmail);
-        } else {
-            submitEmail(email);
-        }
-
-        // 2. Clic sur REGISTER
-        clickRegister();
-
-        // 3. Gestion du formulaire ou message d'erreur
-        /*String actualError = getEmailErrorMessage();
-        if (!actualError.isEmpty()) {
-            System.out.println("🔍 Message d'erreur reçu : " + actualError);
-            assertTrue("Le message d'erreur ne correspond pas", actualError.contains(messageFinal));
-            skipFormSteps = true;
-            return;
-        }*/
-
-        skipFormSteps = false; // s'assurer qu'on continue si pas d'erreur
-
-        // 4. Suite du formulaire
-        selectGender(genre);
-        fillName(prenom, nom);
-        fillPassword(password);
-        selectDate(dateNaissance);
-        checkNewsletter(newsletter);
-
-        // 5. Vérification finale
-      /*  if (!messageFinal.equalsIgnoreCase("Fail")) {
-            String finalMessage = getFinalMessage();
-            System.out.println("✅ Message affiché : " + finalMessage);
-            assertTrue(finalMessage.contains(messageFinal));
-        }*/
-        clickRegister();
     }
 
 }
